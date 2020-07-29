@@ -17,19 +17,23 @@ with open(csvpath) as csvfile:
   # row = next(electionreader)
 
   for row in electionreader:
+
+    ##vote counter
     vote_count += 1
     candidates = (row[2])
+
+    ##candidate work for votes
     if candidates not in candidates_list:
         candidates_list.append(candidates)
         candidate_votes[candidates] = 0
     candidate_votes[candidates] = candidate_votes[candidates] + 1
     # Total_Net += int(row[1])
 
+
+##print data
 print("Election Results")
 print("------------------")
 print(f"Total Votes: {vote_count}")
-# print(candidates_list)
-# print(candidate_votes)
 potential_candidate = candidates_list[0]
 winning_votes = candidate_votes[potential_candidate]
 
