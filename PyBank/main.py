@@ -8,6 +8,8 @@ import os
 # Module for reading CSV files
 import csv
 
+
+##setting variables
 Total_Count = 0
 Total_Months = []
 
@@ -34,31 +36,45 @@ with open(csvpath) as csvfile:
     row = next(csv_reader)
     # print(row)
     
+    ##pulling data from row 1 
     previous_row = int(row[1])
     Total_Count += 1
     Net += int(row[1])
 
     for row in csv_reader:
+        #counters for months
         Total_Count += 1
+
+        #counter for net amount pulling in data in numbers from the row 1
         Net += int(row[1])
+
+        ##list of dates bringing in the data from row 1
         Date.append(row[0])
         Net_Change = int(row[1]) - previous_row
+
+        ##data from Net_change "row 1" being added to Monthly Change list 
         Monthly_Change.append(Net_Change)  
         previous_row = int(row[1])
+
+        ##Data from row 0 being added to Total Months List
         Total_Months.append(row[0])
 
-        
+        ##math for increase
         if int(row[1]) > Greatest_Increase: 
             Greatest_Increase = int(row[1])
             Greatest_Increase_Month = row[0]
 
+        ##math for decrease
         if int(row[1]) < Greatest_Decrease:
             Greatest_Decrease = int(row[1])
             Greatest_Decrease_Month = row[0]
-         
+
+
+        ##defining max and min 
         Max = max(Monthly_Change)
         Min = min(Monthly_Change)
 
+        ##math for avg
         Average = round(sum(Monthly_Change)/ len(Monthly_Change), 2)
 
 print("Financial Analysis")
